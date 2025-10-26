@@ -1,6 +1,8 @@
 export const messagesMundusEn = {
   mageBoardPage: {
     title: 'Mage board',
+    information: 'Informations',
+    mageName: 'Name: {{name}}',
   },
 
   spellBoardPage: {
@@ -17,6 +19,8 @@ export const messagesMundusEn = {
 export const messagesMundusFr = {
   mageBoardPage: {
     title: 'Table du mage',
+    information: 'Informations',
+    mageName: 'Nom: {{name}}',
   },
 
   spellBoardPage: {

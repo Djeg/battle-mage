@@ -1,3 +1,4 @@
+import { identity } from '@/common/libs/fns/identity'
 import type { AvailableLocale } from '@/common/libs/translations/translations'
 import { messagesEn, messagesFr } from '@/translations/messages'
 import { useEffectOnce } from '@legendapp/state/react'
@@ -21,10 +22,6 @@ export type I18Next = {
 export const I18NextContext = createContext<I18Next>({
   locale: DEFAULT_LOCALE,
 })
-
-function identity<T>(value: T): T {
-  return value
-}
 
 export const SetI18NextContext =
   createContext<Dispatch<SetStateAction<I18Next>>>(identity)

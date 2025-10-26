@@ -2,6 +2,7 @@ import { useMagesQuery } from '@/academy/hooks/use-mages-query/use-mages-query'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
 import { useLogout } from '@/common/hooks/use-logout/use-logout'
 import { t } from '@/common/libs/translations/translations'
+import type { Mage } from '@/common/schemas/mage-schema'
 import { router } from 'expo-router'
 import { Button, Heading, ScrollView, Text, View, YStack } from 'tamagui'
 import { MageCard } from '../mage-card/mage-card'
@@ -12,6 +13,14 @@ export function AcademyHomePage() {
 
   const handleCreateMage = () => {
     router.push('/academy/create-mage')
+  }
+
+  const handleSelectMage = (mage: Mage) => () => {
+    router.push(`/mundus/${mage.id}/mage-board`)
+  }
+
+  const handleRemoveMage = (mage: Mage) => () => {
+    console.log('remove mage', mage)
   }
 
   return (
@@ -34,7 +43,12 @@ export function AcademyHomePage() {
           <ScrollView flexGrow={1}>
             <YStack gap={12}>
               {mages.map(mage => (
-                <MageCard key={mage.id} mage={mage} />
+                <MageCard
+                  key={mage.id}
+                  mage={mage}
+                  onSelect={handleSelectMage(mage)}
+                  onRemove={handleRemoveMage(mage)}
+                />
               ))}
             </YStack>
           </ScrollView>

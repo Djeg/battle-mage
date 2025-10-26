@@ -1,5 +1,5 @@
-import { mageSchema } from '@/academy/schemas/mage-schema'
 import type { SupabaseClient } from '@/common/components/supabase-provider/supabase-provider'
+import { mageSchema } from '@/common/schemas/mage-schema'
 
 export type FetchMagesPayload = {
   client: SupabaseClient
