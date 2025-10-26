@@ -3,6 +3,7 @@ import { FormErrors } from '@/common/components/form-errors/form-errors'
 import { FormField } from '@/common/components/form-field/form-field'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
 import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
+import { t } from '@/common/libs/translations/translations'
 import { Memo, useObservable } from '@legendapp/state/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from 'expo-router'
@@ -27,8 +28,7 @@ export function LoginScreen() {
 
       if (error) {
         submissionErrors.set([
-          error.message ??
-            'Une erreur est survenue lors de la connexion, veuillez réessayer plus tard',
+          error.message ?? t('account.loginScreen.submissionError'),
         ])
       }
     },
@@ -38,9 +38,9 @@ export function LoginScreen() {
     <PageLayout>
       <PageLayout.Centered>
         <YStack gap={6} paddingBottom={12}>
-          <Heading textAlign="center">Connexion</Heading>
+          <Heading textAlign="center">{t('account.loginScreen.title')}</Heading>
           <Text textAlign="center" color="gray" flexWrap="wrap">
-            Connectez-vous pour commencer à jouer
+            {t('account.loginScreen.description')}
           </Text>
         </YStack>
         <YStack gap={12}>
@@ -53,7 +53,7 @@ export function LoginScreen() {
                 )}
               >
                 <Input
-                  placeholder="Email"
+                  placeholder={t('account.loginScreen.emailPlaceholder')}
                   value={field.state.value}
                   onChangeText={field.handleChange}
                   autoCapitalize="none"
@@ -69,7 +69,7 @@ export function LoginScreen() {
                 )}
               >
                 <Input
-                  placeholder="Mot de passe"
+                  placeholder={t('account.loginScreen.passwordPlaceholder')}
                   value={field.state.value}
                   onChangeText={field.handleChange}
                   autoCapitalize="none"
@@ -84,14 +84,18 @@ export function LoginScreen() {
                 onPress={handleSubmit}
                 disabled={isSubmitting || !isValid}
               >
-                {isSubmitting ? 'En cours de connexion...' : 'Connexion'}
+                {isSubmitting
+                  ? t('account.loginScreen.submitButtonLoading')
+                  : t('account.loginScreen.submitButton')}
               </Button>
             )}
           </Subscribe>
           <Text textAlign="center" color="gray">
-            Vous n&apos;avez pas de compte ?&nbsp;
+            {t('account.loginScreen.noAccount')}&nbsp;
             <Text asChild color="blue">
-              <Link href="/create-account">Créez-en un</Link>
+              <Link href="/create-account">
+                {t('account.loginScreen.createAccount')}
+              </Link>
             </Text>
           </Text>
         </YStack>

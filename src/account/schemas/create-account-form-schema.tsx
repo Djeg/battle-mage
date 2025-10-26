@@ -1,5 +1,6 @@
-import { emailSchema } from '@/schemas/email-schema'
-import { passwordSchema } from '@/schemas/password-schema'
+import { t } from '@/common/libs/translations/translations'
+import { emailSchema } from '@/common/schemas/email-schema'
+import { passwordSchema } from '@/common/schemas/password-schema'
 import z from 'zod'
 
 export const createAccountFormSchema = z
@@ -9,6 +10,6 @@ export const createAccountFormSchema = z
     repeatPassword: passwordSchema,
   })
   .refine(data => data.password === data.repeatPassword, {
-    message: 'Les mots de passe ne correspondent pas',
+    message: t('account.schemas.createAccountForm.repeatPassword.mismatch'),
     path: ['repeatPassword'],
   })

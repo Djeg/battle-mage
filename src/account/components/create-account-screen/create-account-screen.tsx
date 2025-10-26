@@ -3,6 +3,7 @@ import { FormErrors } from '@/common/components/form-errors/form-errors'
 import { FormField } from '@/common/components/form-field/form-field'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
 import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
+import { t } from '@/common/libs/translations/translations'
 import { Memo, useObservable } from '@legendapp/state/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from 'expo-router'
@@ -28,8 +29,7 @@ export function CreateAccountScreen() {
 
       if (error) {
         submissionErrors.set([
-          error.message ??
-            'Une erreur est survenue lors de la création du compte, veuillez réessayer plus tard',
+          error.message ?? t('account.createAccountScreen.submissionError'),
         ])
       }
     },
@@ -39,9 +39,11 @@ export function CreateAccountScreen() {
     <PageLayout>
       <PageLayout.Centered>
         <YStack gap={6} paddingBottom={12}>
-          <Heading textAlign="center">Créez votre compte</Heading>
+          <Heading textAlign="center">
+            {t('account.createAccountScreen.title')}
+          </Heading>
           <Text textAlign="center" color="gray">
-            Créez votre compte afin de pouvoir commencer à jouer
+            {t('account.createAccountScreen.description')}
           </Text>
         </YStack>
         <YStack gap={12}>
@@ -54,7 +56,9 @@ export function CreateAccountScreen() {
                 )}
               >
                 <Input
-                  placeholder="Email"
+                  placeholder={t(
+                    'account.createAccountScreen.emailPlaceholder',
+                  )}
                   value={field.state.value}
                   onChangeText={field.handleChange}
                   autoCapitalize="none"
@@ -70,7 +74,9 @@ export function CreateAccountScreen() {
                 )}
               >
                 <Input
-                  placeholder="Mot de passe"
+                  placeholder={t(
+                    'account.createAccountScreen.passwordPlaceholder',
+                  )}
                   value={field.state.value}
                   onChangeText={field.handleChange}
                   autoCapitalize="none"
@@ -88,7 +94,9 @@ export function CreateAccountScreen() {
                 )}
               >
                 <Input
-                  placeholder="Répétez votre mot de passe"
+                  placeholder={t(
+                    'account.createAccountScreen.repeatPasswordPlaceholder',
+                  )}
                   value={field.state.value}
                   onChangeText={field.handleChange}
                   autoCapitalize="none"
@@ -104,15 +112,17 @@ export function CreateAccountScreen() {
                 disabled={isSubmitting || !isValid}
               >
                 {isSubmitting
-                  ? 'Nous créons votre compte...'
-                  : 'Créer votre compte'}
+                  ? t('account.createAccountScreen.submitButtonLoading')
+                  : t('account.createAccountScreen.submitButton')}
               </Button>
             )}
           </Subscribe>
           <Text textAlign="center" color="gray">
-            Vous avez déjà un compte ?&nbsp;
+            {t('account.createAccountScreen.alreadyHaveAccount')}&nbsp;
             <Text asChild color="blue">
-              <Link href="/login">Connéctez-vous</Link>
+              <Link href="/login">
+                {t('account.createAccountScreen.login')}
+              </Link>
             </Text>
           </Text>
         </YStack>

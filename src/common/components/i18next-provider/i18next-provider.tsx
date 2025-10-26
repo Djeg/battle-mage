@@ -1,6 +1,5 @@
-import { messagesEn } from '@/common/libs/translations/messages.en'
-import { messagesFr } from '@/common/libs/translations/messages.fr'
 import type { AvailableLocale } from '@/common/libs/translations/translations'
+import { messagesEn, messagesFr } from '@/translations/messages'
 import { useEffectOnce } from '@legendapp/state/react'
 import { default as i18nextLib } from 'i18next'
 import {

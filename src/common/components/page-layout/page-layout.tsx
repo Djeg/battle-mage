@@ -1,3 +1,4 @@
+import { t } from '@/common/libs/translations/translations'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { type PropsWithChildren, Suspense as ReactSuspense } from 'react'
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
@@ -82,12 +83,14 @@ function DefaultErrorBoundaryFallback({ reset }: ErrorBoundaryFallbackProps) {
     <PageLayout.Centered>
       <YStack gap={6}>
         <Heading textAlign="center">
-          Oh mince ! Une erreur est survenue dans l&apos;Aetherius !
+          {t('common.pageLayout.errorBoundary.title')}
         </Heading>
         <Text color="gray" textAlign="center" flexWrap="wrap">
-          Pas de panique, nous allons tout reprendre à zéro.
+          {t('common.pageLayout.errorBoundary.description')}
         </Text>
-        <Button onPress={reset}>Recommencer</Button>
+        <Button onPress={reset}>
+          {t('common.pageLayout.errorBoundary.reset')}
+        </Button>
       </YStack>
     </PageLayout.Centered>
   )

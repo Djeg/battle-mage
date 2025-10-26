@@ -2,6 +2,7 @@ import { fetchMages } from '@/academy/libs/fetch-mages/fetch-mages'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
 import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
 import { useUser } from '@/common/hooks/use-user/use-user'
+import { t } from '@/common/libs/translations/translations'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Button, Card, Heading, Text, YStack } from 'tamagui'
 
@@ -33,14 +34,16 @@ function AcademyHomePageContent() {
 
   return (
     <PageLayout.Vertical>
-      <Heading textAlign="center">Votre académie</Heading>
+      <Heading textAlign="center">{t('academy.academyHomePage.title')}</Heading>
       {mages.length === 0 ? (
         <PageLayout.Centered>
           <YStack gap={12}>
             <Text textAlign="center">
-              Vous n&apos;avez pas encore de mage. Créez-en un pour commencer.
+              {t('academy.academyHomePage.emptyMageList')}
             </Text>
-            <Button onPress={handleCreateMage}>Créer un mage</Button>
+            <Button onPress={handleCreateMage}>
+              {t('academy.academyHomePage.createMageButton')}
+            </Button>
           </YStack>
         </PageLayout.Centered>
       ) : (
