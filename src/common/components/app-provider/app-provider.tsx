@@ -1,12 +1,15 @@
+import { useEffectOnce } from '@legendapp/state/react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type User } from '@supabase/supabase-js'
 import { defaultConfig } from '@tamagui/config/v4'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { router } from 'expo-router'
 import {
   createContext,
   type PropsWithChildren,
   useContext,
   useMemo,
+  useState,
 } from 'react'
 import { createTamagui, TamaguiProvider } from 'tamagui'
 
@@ -16,7 +19,9 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <TamaguiProvider config={tamaguiConfig}>
       <QueryClientProvider client={tanstackQueryClient}>
-        <SupabaseProvider>{children}</SupabaseProvider>
+        <SupabaseProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </SupabaseProvider>
       </QueryClientProvider>
     </TamaguiProvider>
   )
@@ -80,4 +85,41 @@ export function useSupabase() {
   }
 
   return client
+}
+
+// Authentication provider
+
+export const AuthUserContext = createContext<User | undefined>(undefined)
+
+export function AuthProvider({ children }: PropsWithChildren) {
+  const supabaseClient = useSupabase()
+  const [user, setUser] = useState<User | undefined>(undefined)
+
+  useEffectOnce(() => {
+    const { data } = supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        setUser(session?.user ?? undefined)
+
+        router.push('/mage-maker')
+      } else if (event === 'SIGNED_OUT') {
+        setUser(undefined)
+
+        router.push('/')
+      }
+    })
+
+    return () => {
+      data.subscription.unsubscribe()
+    }
+  }, [])
+
+  return (
+    <AuthUserContext.Provider value={user}>{children}</AuthUserContext.Provider>
+  )
+}
+
+export function useUser() {
+  const user = useContext(AuthUserContext)
+
+  return user
 }
