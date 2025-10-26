@@ -1,40 +1,23 @@
-import { fetchMages } from '@/academy/libs/fetch-mages/fetch-mages'
+import { useMagesQuery } from '@/academy/hooks/use-mages-query/use-mages-query'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
-import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
-import { useUser } from '@/common/hooks/use-user/use-user'
+import { useLogout } from '@/common/hooks/use-logout/use-logout'
 import { t } from '@/common/libs/translations/translations'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { Button, Card, Heading, Text, YStack } from 'tamagui'
+import { router } from 'expo-router'
+import { Button, Heading, ScrollView, Text, View, YStack } from 'tamagui'
+import { MageCard } from '../mage-card/mage-card'
 
 export function AcademyHomePage() {
-  return (
-    <PageLayout>
-      <PageLayout.Suspense>
-        <PageLayout.ErrorBoundary>
-          <PageLayout.Centered>
-            <AcademyHomePageContent />
-          </PageLayout.Centered>
-        </PageLayout.ErrorBoundary>
-      </PageLayout.Suspense>
-    </PageLayout>
-  )
-}
-
-function AcademyHomePageContent() {
-  const supabaseClient = useSupabase()
-  const user = useUser()
-  const { data: mages } = useSuspenseQuery({
-    queryKey: ['mages'],
-    queryFn: fetchMages({ client: supabaseClient, userId: user.id }),
-  })
+  const mages = useMagesQuery()
+  const logout = useLogout()
 
   const handleCreateMage = () => {
-    console.warn('create mage')
+    router.push('/academy/create-mage')
   }
 
   return (
     <PageLayout.Vertical>
       <Heading textAlign="center">{t('academy.academyHomePage.title')}</Heading>
+
       {mages.length === 0 ? (
         <PageLayout.Centered>
           <YStack gap={12}>
@@ -47,13 +30,23 @@ function AcademyHomePageContent() {
           </YStack>
         </PageLayout.Centered>
       ) : (
-        <YStack>
-          {mages.map(mage => (
-            <Card key={mage.id}>
-              <Text>{mage.name}</Text>
-            </Card>
-          ))}
-        </YStack>
+        <View flex={1}>
+          <ScrollView flexGrow={1}>
+            <YStack gap={12}>
+              {mages.map(mage => (
+                <MageCard key={mage.id} mage={mage} />
+              ))}
+            </YStack>
+          </ScrollView>
+          <YStack gap={6}>
+            <Button onPress={handleCreateMage}>
+              {t('academy.academyHomePage.createMageButton')}
+            </Button>
+            <Button onPress={logout}>
+              {t('academy.academyHomePage.logoutButton')}
+            </Button>
+          </YStack>
+        </View>
       )}
     </PageLayout.Vertical>
   )

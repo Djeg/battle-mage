@@ -6,18 +6,12 @@ export type FetchMagesPayload = {
   userId: string
 }
 
-export function fetchMages({ client, userId }: FetchMagesPayload) {
-  return async () => {
-    const { data } = await client
-      .from('mages')
-      .select('id, name')
-      .eq('created_by', userId)
-      .order('created_at', { ascending: false })
+export async function fetchMages({ client, userId }: FetchMagesPayload) {
+  const { data } = await client
+    .from('mages')
+    .select('id, name')
+    .eq('created_by', userId)
+    .order('created_at', { ascending: false })
 
-    if (!data) {
-      return []
-    }
-
-    return data.map(mage => mageSchema.parse(mage))
-  }
+  return (data ?? []).map(mage => mageSchema.parse(mage))
 }

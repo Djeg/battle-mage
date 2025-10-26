@@ -1,7 +1,7 @@
 import {
   messagesAcademyEn,
   messagesAcademyFr,
-} from '@/academy/translations/message.academy'
+} from '@/academy/translations/messages.academy'
 import {
   messagesAccountEn,
   messagesAccountFr,
