@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router'
 
-export default function MageMakerLayout() {
+export function AcademyRootLayout() {
   return (
     <Stack>
       <Stack.Screen

@@ -1,7 +1,5 @@
 import z from 'zod'
 
-export const emailSchema = z.email({ message: "L'email est invalide" })
-
 export const passwordSchema = z
   .string()
   .min(8, {

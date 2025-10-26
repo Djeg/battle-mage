@@ -1,14 +1,14 @@
-import { useSupabase } from '@/common/components/app-provider/app-provider'
+import { loginFormSchema } from '@/account/schemas/login-form-schema'
 import { FormErrors } from '@/common/components/form-errors/form-errors'
 import { FormField } from '@/common/components/form-field/form-field'
-import { loginFormSchema } from '@/schemas/login-form-schema'
+import { PageLayout } from '@/common/components/page-layout/page-layout'
+import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
 import { Memo, useObservable } from '@legendapp/state/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from 'expo-router'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Button, Heading, Input, Text, View, YStack } from 'tamagui'
+import { Button, Heading, Input, Text, YStack } from 'tamagui'
 
-export default function Login() {
+export function LoginScreen() {
   const supabaseClient = useSupabase()
   const submissionErrors = useObservable<string[]>([])
   const { Field, Subscribe, handleSubmit } = useForm({
@@ -35,11 +35,11 @@ export default function Login() {
   })
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View flex={1} paddingHorizontal={12} justifyContent="center">
+    <PageLayout>
+      <PageLayout.Centered>
         <YStack gap={6} paddingBottom={12}>
           <Heading textAlign="center">Connexion</Heading>
-          <Text textAlign="center" color="gray">
+          <Text textAlign="center" color="gray" flexWrap="wrap">
             Connectez-vous pour commencer à jouer
           </Text>
         </YStack>
@@ -95,7 +95,7 @@ export default function Login() {
             </Text>
           </Text>
         </YStack>
-      </View>
-    </SafeAreaView>
+      </PageLayout.Centered>
+    </PageLayout>
   )
 }

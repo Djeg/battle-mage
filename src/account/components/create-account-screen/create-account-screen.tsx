@@ -1,14 +1,14 @@
-import { useSupabase } from '@/common/components/app-provider/app-provider'
+import { createAccountFormSchema } from '@/account/schemas/create-account-form-schema'
 import { FormErrors } from '@/common/components/form-errors/form-errors'
 import { FormField } from '@/common/components/form-field/form-field'
-import { createAccountFormSchema } from '@/schemas/create-account-form-schema'
+import { PageLayout } from '@/common/components/page-layout/page-layout'
+import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
 import { Memo, useObservable } from '@legendapp/state/react'
 import { useForm } from '@tanstack/react-form'
 import { Link } from 'expo-router'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { Button, Heading, Input, Text, View, YStack } from 'tamagui'
+import { Button, Heading, Input, Text, YStack } from 'tamagui'
 
-export default function CreateAccount() {
+export function CreateAccountScreen() {
   const supabaseClient = useSupabase()
   const submissionErrors = useObservable<string[]>([])
   const { Field, Subscribe, handleSubmit } = useForm({
@@ -36,8 +36,8 @@ export default function CreateAccount() {
   })
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View flex={1} paddingHorizontal={12} justifyContent="center">
+    <PageLayout>
+      <PageLayout.Centered>
         <YStack gap={6} paddingBottom={12}>
           <Heading textAlign="center">Créez votre compte</Heading>
           <Text textAlign="center" color="gray">
@@ -116,7 +116,7 @@ export default function CreateAccount() {
             </Text>
           </Text>
         </YStack>
-      </View>
-    </SafeAreaView>
+      </PageLayout.Centered>
+    </PageLayout>
   )
 }

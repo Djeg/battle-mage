@@ -1,5 +1,6 @@
+import { emailSchema } from '@/schemas/email-schema'
+import { passwordSchema } from '@/schemas/password-schema'
 import z from 'zod'
-import { emailSchema, passwordSchema } from './atom-schemas'
 
 export const createAccountFormSchema = z
   .object({
