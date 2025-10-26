@@ -1,12 +1,13 @@
+import type { Database } from '@/generated/supabase-types'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createClient } from '@supabase/supabase-js'
 import { createContext, type PropsWithChildren, useMemo } from 'react'
 
-export type SupabaseClient = ReturnType<typeof createClient>
+export type SupabaseClient = ReturnType<typeof createClient<Database>>
 
-export const SupabaseContext = createContext<
-  ReturnType<typeof createClient> | undefined
->(undefined)
+export const SupabaseContext = createContext<SupabaseClient | undefined>(
+  undefined,
+)
 
 export type SupabaseProviderProps = PropsWithChildren<{
   url?: string
@@ -20,7 +21,7 @@ export function SupabaseProvider({
 }: SupabaseProviderProps) {
   const client = useMemo<SupabaseClient>(
     () =>
-      createClient(url!, key!, {
+      createClient<Database>(url!, key!, {
         auth: {
           storage: AsyncStorage,
           autoRefreshToken: true,

@@ -1,12 +1,57 @@
+import { fetchMages } from '@/academy/libs/fetch-mages/fetch-mages'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
-import { Heading } from 'tamagui'
+import { useSupabase } from '@/common/hooks/use-supabase/use-supabase'
+import { useUser } from '@/common/hooks/use-user/use-user'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { Button, Card, Heading, Text, YStack } from 'tamagui'
 
 export function AcademyHomePage() {
   return (
     <PageLayout>
-      <PageLayout.Centered>
-        <Heading textAlign="center">Academy</Heading>
-      </PageLayout.Centered>
+      <PageLayout.Suspense>
+        <PageLayout.ErrorBoundary>
+          <PageLayout.Centered>
+            <AcademyHomePageContent />
+          </PageLayout.Centered>
+        </PageLayout.ErrorBoundary>
+      </PageLayout.Suspense>
     </PageLayout>
+  )
+}
+
+function AcademyHomePageContent() {
+  const supabaseClient = useSupabase()
+  const user = useUser()
+  const { data: mages } = useSuspenseQuery({
+    queryKey: ['mages'],
+    queryFn: fetchMages({ client: supabaseClient, userId: user.id }),
+  })
+
+  const handleCreateMage = () => {
+    console.warn('create mage')
+  }
+
+  return (
+    <PageLayout.Vertical>
+      <Heading textAlign="center">Votre académie</Heading>
+      {mages.length === 0 ? (
+        <PageLayout.Centered>
+          <YStack gap={12}>
+            <Text textAlign="center">
+              Vous n&apos;avez pas encore de mage. Créez-en un pour commencer.
+            </Text>
+            <Button onPress={handleCreateMage}>Créer un mage</Button>
+          </YStack>
+        </PageLayout.Centered>
+      ) : (
+        <YStack>
+          {mages.map(mage => (
+            <Card key={mage.id}>
+              <Text>{mage.name}</Text>
+            </Card>
+          ))}
+        </YStack>
+      )}
+    </PageLayout.Vertical>
   )
 }
