@@ -18,6 +18,11 @@ export function MageBoardPage() {
             <Text>
               {t('mundus.mageBoardPage.mageName', { name: mage.name })}
             </Text>
+            <Text>
+              {t('mundus.mageBoardPage.aetheriums', {
+                aetheriums: mage.aetheriums,
+              })}
+            </Text>
           </Card.Header>
         </Card>
       </ScrollView>

@@ -16,6 +16,7 @@ export function MundusRootLayout() {
             <Tabs.Screen name="mage-board" />
             <Tabs.Screen name="spell-board" />
             <Tabs.Screen name="parameters" />
+            <Tabs.Screen name="knowledge-board" />
           </Tabs>
         </PageLayout.ErrorBoundary>
       </PageLayout.Suspense>

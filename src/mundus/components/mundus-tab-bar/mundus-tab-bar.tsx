@@ -20,6 +20,11 @@ export function MundusTabBar() {
             <FontAwesome6 name="wand-sparkles" size={34} color="black" />
           </View>
         </Link>
+        <Link href={`/mundus/${mageId}/knowledge-board`}>
+          <View padding={2}>
+            <FontAwesome6 name="book" size={34} color="black" />
+          </View>
+        </Link>
         <Link href={`/mundus/${mageId}/parameters`}>
           <View padding={2}>
             <FontAwesome name="gear" size={34} color="black" />

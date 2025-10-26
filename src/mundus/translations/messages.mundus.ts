@@ -3,6 +3,7 @@ export const messagesMundusEn = {
     title: 'Mage board',
     information: 'Informations',
     mageName: 'Name: {{name}}',
+    aetheriums: 'Aetheriums: {{aetheriums}} points',
   },
 
   spellBoardPage: {
@@ -14,6 +15,10 @@ export const messagesMundusEn = {
     logoutButton: 'Logout',
     academyButton: 'My academy',
   },
+
+  knowledgeBoardPage: {
+    title: 'Knowledge board',
+  },
 }
 
 export const messagesMundusFr = {
@@ -21,6 +26,7 @@ export const messagesMundusFr = {
     title: 'Table du mage',
     information: 'Informations',
     mageName: 'Nom: {{name}}',
+    aetheriums: 'Aetheriums: {{aetheriums}} points',
   },
 
   spellBoardPage: {
@@ -31,5 +37,9 @@ export const messagesMundusFr = {
     title: 'Paramètres',
     logoutButton: 'Déconnexion',
     academyButton: 'Mon académie',
+  },
+
+  knowledgeBoardPage: {
+    title: 'Table des connaissances',
   },
 }

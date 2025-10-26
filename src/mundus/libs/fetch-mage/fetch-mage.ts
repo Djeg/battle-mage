@@ -10,7 +10,7 @@ export type FetchMagePayload = {
 export async function fetchMage({ client, userId, mageId }: FetchMagePayload) {
   const { data } = await client
     .from('mages')
-    .select('id, name')
+    .select('id, name, aetheriums')
     .eq('created_by', userId)
     .eq('id', mageId)
     .single()

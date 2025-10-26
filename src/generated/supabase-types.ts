@@ -16,22 +16,25 @@ export type Database = {
     Tables: {
       mages: {
         Row: {
+          aetheriums: number
           created_at: string
-          created_by: string | null
+          created_by: string
           id: string
           name: string
           updated_at: string
         }
         Insert: {
+          aetheriums?: number
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           id?: string
           name?: string
           updated_at?: string
         }
         Update: {
+          aetheriums?: number
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           id?: string
           name?: string
           updated_at?: string
