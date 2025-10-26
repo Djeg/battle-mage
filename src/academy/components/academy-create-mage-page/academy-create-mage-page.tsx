@@ -1,5 +1,5 @@
 import { useNewMageMutation } from '@/academy/hooks/use-new-mage-mutation/use-new-mage-mutation'
-import { newMageFormSchema } from '@/academy/schemas/new-mage-form-schema'
+import { newMageSchema } from '@/academy/schemas/new-mage-schema'
 import { FormErrors } from '@/common/components/form-errors/form-errors'
 import { FormField } from '@/common/components/form-field/form-field'
 import { PageLayout } from '@/common/components/page-layout/page-layout'
@@ -17,7 +17,7 @@ export function AcademyCreateMagePage() {
       name: '',
     },
     validators: {
-      onSubmit: newMageFormSchema,
+      onSubmit: newMageSchema,
     },
     onSubmit: async ({ value }) => {
       const { error } = await newMageMutation.mutateAsync(value)

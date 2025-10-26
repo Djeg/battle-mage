@@ -1,5 +1,6 @@
 import type { Mage } from '@/academy/schemas/mage-schema'
 import { t } from '@/common/libs/translations/translations'
+import { router } from 'expo-router'
 import { Button, Card, Heading } from 'tamagui'
 
 export type MageCardProps = {
@@ -7,7 +8,9 @@ export type MageCardProps = {
 }
 
 export function MageCard({ mage }: MageCardProps) {
-  const handleSelect = () => {}
+  const handleSelect = () => {
+    router.push(`/mundus/${mage.id}/mage-board`)
+  }
 
   const handleRemove = () => {}
 
