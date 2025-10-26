@@ -6,6 +6,12 @@ export const messagesMundusEn = {
   spellBoardPage: {
     title: 'Spell board',
   },
+
+  parametersPage: {
+    title: 'Parameters',
+    logoutButton: 'Logout',
+    academyButton: 'My academy',
+  },
 }
 
 export const messagesMundusFr = {
@@ -15,5 +21,11 @@ export const messagesMundusFr = {
 
   spellBoardPage: {
     title: 'Table des sorts',
+  },
+
+  parametersPage: {
+    title: 'Paramètres',
+    logoutButton: 'Déconnexion',
+    academyButton: 'Mon académie',
   },
 }

@@ -1,3 +1,4 @@
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import { Link, useLocalSearchParams } from 'expo-router'
@@ -17,6 +18,11 @@ export function MundusTabBar() {
         <Link href={`/mundus/${mageId}/spell-board`}>
           <View padding={2}>
             <FontAwesome6 name="wand-sparkles" size={34} color="black" />
+          </View>
+        </Link>
+        <Link href={`/mundus/${mageId}/parameters`}>
+          <View padding={2}>
+            <FontAwesome name="gear" size={34} color="black" />
           </View>
         </Link>
       </XStack>
